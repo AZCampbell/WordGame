@@ -49,23 +49,27 @@ document.addEventListener('keydown', function (event) {
 })
 
 const checkAnswer = () => {
+
   if (testWord.length === 5) {
-    
     for (let i = 0; i <= testWord.length - 1; i++) {
-      turnGrey(i);
+      turnGrey[i];
       for (let j = 0; j <= dailyWord.length - 1; j++) {
-        if (testWord[i] === dailyWord[j]) {
-          if (i === j) {
-            turnGreen(i)
+        turnGrey[i];
+        if (testWord[i] === dailyWord[j] && i == j) {
+          console.log(`Letter ${testWord[i]} and ${dailyWord[j]} match`);
+          turnGreen(i);
+          if (i != j) {
+            turnYellow(i)
             guessed.push(testWord[i]);
             
-          } else if (i != j) {
+          } else if (i !== j) {
+            console.log(`Letter ${testWord[i]}at ${i} and ${dailyWord[j]} at ${j} DONT match`)
             console.log("There are yellows here!")
             turnYellow(i)
             guessed.push(testWord[i]);
             console.log(`pushed ${testWord[i]}`);
           }
-        } 
+        }
         
       }
     }
@@ -80,7 +84,7 @@ const checkAnswer = () => {
       console.log(`You have pressed ENTER ${columnCount} and LOST!`)
     }
   } 
-  guessed = [];
+  guessed = []
 }
 
 const turnGreen = function (index) {
@@ -91,7 +95,8 @@ const turnGreen = function (index) {
 const turnYellow = function (index) {
   if (guessed.includes(testWord[index]) === true) {
     console.log("I am running the if part")
-    turnGrey(index)
+    currentSpot = beginLetter + index
+  letterblock[currentSpot].style.backgroundColor = 'grey'
   } else {
     console.log("I am running the else part")
    
